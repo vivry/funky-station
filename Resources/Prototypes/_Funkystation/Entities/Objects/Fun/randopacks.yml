@@ -1,0 +1,122 @@
+- type: entityTable
+  id: RandoPackRoll
+  table: !type:GroupSelector
+    children:
+    - !type:NestedSelector
+      tableId: AllPlushiesTable
+      weight: 5
+    - id: ToyFigurineCosmicCultist
+    - id: RadioHandheldCommand
+      weight: 0.1
+    - id: Brick
+    - id: CigPackBlack
+    - id: CigPackSyndicate
+      weight: 0.1
+    - id: Ashtray
+    - id: ToyAi
+    - id: Football
+    - id: ResearchDisk
+    - id: SoapNT
+    - id: Coal1
+    - id: ComputerTelevisionCircuitboard
+    - id: StationMapCircuitboard
+    - id: EncryptionKeyCommon
+    - id: EncryptionKeyBinary
+      weight: 0.2
+    - id: HandheldStationMap
+    - id: ToyFigurineCaptain
+    - id: ToyFigurineLawyer
+    - id: ToyFigurineNukie
+    - id: ToyFigurineHamlet
+    - id: ToyFigurineAtmosTech
+    - id: ToyFigurineSalvage
+    - id: WhiteKing
+    - id: BlackKing
+    - id: SheetSteel
+    - id: IngotGold
+      weight: 0.1
+    - id: ShardGlass
+    - id: ShardGlassPlasma
+    - id: ShardGlassReinforced
+    - id: ShardGlassClockwork
+    - id: SpaceCash10
+    - id: SpaceCash100
+      weight: 0.1
+
+- type: entity
+  id: RandoPack
+  parent: BaseItem
+  name: Rand-O-Pack
+  description: NT-branded randomness-in-a-box. Now, even employees can gamble!
+  components:
+  - type: Sprite
+    sprite: _Funkystation/Objects/Fun/Randopacks/randopack.rsi
+    layers:
+      - state: randopack
+  - type: Item
+    size: Small
+  - type: StaticPrice
+    price: 20
+  - type: SpawnTableOnUse
+    table: !type:AllSelector
+      children:
+      - !type:NestedSelector
+        tableId: RandoPackRoll
+      - !type:NestedSelector
+        tableId: RandoPackRoll
+    sound:
+      path: /Audio/Effects/unwrap.ogg
+
+- type: entity
+  id: RandoPackMini
+  parent: BaseItem
+  name: Rand-O-Pack Mini
+  description: A smaller, even cheaper Rand-O-Pack. Provides a miniscule dopamine hit in the form of one tiny trinket.
+  components:
+  - type: Sprite
+    sprite: _Funkystation/Objects/Fun/Randopacks/randopackmini.rsi
+    layers:
+      - state: randopackmini
+  - type: Item
+    size: Small
+  - type: StaticPrice
+    price: 5
+  - type: SpawnTableOnUse
+    table: !type:GroupSelector
+      children:
+      - id: TrainWhistle
+      - id: WrappedBee
+      - id: RubberStampCyborg
+      - id: Mousetrap
+      - id: PercentileDie
+      - id: d20Dice
+      - id: d12Dice
+      - id: d10Dice
+      - id: d8Dice
+      - id: d6Dice
+      - id: d4Dice
+      - id: StrangePill
+      - id: SpaceCash
+      - id: SyndicateBusinessCard
+        weight: 0.1
+    sound:
+      path: /Audio/Effects/unwrap.ogg
+
+- type: entity
+  id: RandoPackBig
+  parent: BaseStorageItem
+  name: Rand-O-Box
+  description: NT's premium gambling offering. Contains several cheap items.
+  components:
+  - type: Sprite
+    sprite: _Funkystation/Objects/Fun/Randopacks/randobox.rsi
+    layers:
+      - state: randobox
+  - type: Item
+    size: Normal
+  - type: StaticPrice
+    price: 100
+  - type: EntityTableContainerFill
+    contents:
+      entity_storage: !type:NestedSelector
+        tableId: RandoPackRoll
